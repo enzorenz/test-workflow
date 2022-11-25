@@ -1,0 +1,23 @@
+name: Create Staging Release PR
+
+on:
+  push:
+    branches:
+    - master
+
+jobs:
+  staging-release-pr:
+    name: Create Staging Release PR
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: pull-request
+        uses: repo-sync/pull-request@v2
+        with:
+          destination_branch: "staging"
+          pr_title: "IGNORE: auto pr test"
+          pr_body: |
+            ## Changes:
+            <!-- START pr-commits -->
+            <!-- END pr-commits -->
+          pr_draft: true
