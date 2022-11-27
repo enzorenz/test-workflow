@@ -33,4 +33,3 @@ jobs:
           pr_body: |
             ### Changes
           pr_body_with_links: true
-          pr_assignees: enzorenz
