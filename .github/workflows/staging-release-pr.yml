@@ -11,23 +11,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - name: "✏️ Generate release changelog"
+        id: generated_log
+        uses: heinrichreimer/github-changelog-generator-action@v2.3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          releaseBranch: staging
       - name: create-pull-request
         uses: repo-sync/pull-request@v2
         with:
           destination_branch: "staging"
           pr_title: "IGNORE: auto pr test"
+          pr_body: ${{steps.generated_log.outputs.changelog}}
           pr_draft: true
-      - name: update-pull-request
-        uses: k3rnels-actions/pr-update@v2.0.0
-        id: pr_update
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          pr_title: "IGNORE: auto pr test"
-          pr_source: master
-          pr_target: staging
-          pr_body: |
-            ### Description
-            Yes you can use Markdown here too
-            ### Changes
-            The following features have been added:\r\n
-          pr_body_with_links: true
