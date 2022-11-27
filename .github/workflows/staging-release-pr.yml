@@ -19,5 +19,9 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           target_branch: staging
           title: My pull request
+          pr_body: |
+            ## Changes:
+            <!-- Diff commits - START -->
+            <!-- Diff commits - END -->
           draft: true
           get_diff: true
