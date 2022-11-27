@@ -11,16 +11,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: "✏️ Generate release changelog"
-        id: generated_log
-        uses: heinrichreimer/github-changelog-generator-action@v2.3
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          releaseBranch: staging
-      - name: create-pull-request
-        uses: repo-sync/pull-request@v2
+          fetch-depth: 0
+
+      - uses: Wuerike/standard-version-release-branch@1.2.0
         with:
-          destination_branch: "staging"
-          pr_title: "IGNORE: auto pr test"
-          pr_body: ${{steps.generated_log.outputs.changelog}}
-          pr_draft: true
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          origin_branch: master
+          target_branch: staging
+          as_draft: true
+          pr_template: 'PR opened by [standard-version-release-branch](https://github.com/Wuerike/standard-version-release-branch)'
