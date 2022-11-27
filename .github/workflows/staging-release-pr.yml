@@ -23,5 +23,15 @@ jobs:
             <!-- START pr-commits -->
             <!-- END pr-commits -->
           pr_draft: true
-      - name: Pull Request Body
-        uses: technote-space/pr-commit-body-action@v1
+      - name: get git log history
+        run: echo COMMITS=$(git log origin/staging..origin/master --oneline --no-merges) >> $GITHUB_ENV
+      - name: output commits
+        id: git-log-history
+        run: |
+          echo "COMMITS=${{ env.LASTMERGES }}"
+      - name: update-pull-request
+        uses: kt3k/update-pr-description@v2.1.1
+        with:
+          pr_body: ${{steps.git-log-history.outputs.COMMITS}}
+          destination_branch: staging
+          github_token: ${{ secrets.GITHUB_TOKEN }}
