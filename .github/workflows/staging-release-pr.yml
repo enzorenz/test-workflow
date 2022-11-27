@@ -11,12 +11,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: create-release-pr
+      - name: create-pull-request
+        uses: repo-sync/pull-request@v2
+        with:
+          destination_branch: "staging"
+          pr_title: "IGNORE: auto pr test"
+          pr_draft: true
+      - name: update-pull-request
         uses: k3rnels-actions/pr-update@v2.0.0
         id: pr_update
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          pr_title: Awsome PR
           pr_source: master
           pr_target: staging
           pr_body: |
