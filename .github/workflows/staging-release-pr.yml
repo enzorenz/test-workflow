@@ -26,5 +26,5 @@ jobs:
       - uses: Frederick888/gh-ph@v1
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_BASE_REF: master
-          GITHUB_HEAD_REF: staging
+          $GITHUB_BASE_REF: master
+          $GITHUB_HEAD_REF: staging
