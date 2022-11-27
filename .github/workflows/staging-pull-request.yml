@@ -2,7 +2,7 @@
 # where body is auto filled with pull requests merged as history
 # that triggers whenever a push/merge is done on master.
 
-name: Create Staging/Release Pull Request
+name: Staging/Release Pull Request
 
 on:
   push:
@@ -12,7 +12,7 @@ on:
 
 jobs:
   staging-pull-request:
-    name: Create Staging Pull Request
+    name: Create Staging PR
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/master' # run this job only for the master branch
     steps:
@@ -26,7 +26,6 @@ jobs:
           pr_draft: true
       - name: Update pull request body
         uses: k3rnels-actions/pr-update@v2.0.0  # Currently cannot create draft PR
-        id: pr_update
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           pr_title: Staging Release
@@ -36,7 +35,7 @@ jobs:
             ### Changes
           pr_body_with_links: true
   release-pull-request:
-    name: Create Release Pull Request
+    name: Create Release PR
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/staging' # run this job only for the staging branch
     steps:
@@ -50,12 +49,11 @@ jobs:
           pr_draft: true
       - name: Update pull request body
         uses: k3rnels-actions/pr-update@v2.0.0  # Currently cannot create draft PR
-        id: pr_update
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           pr_title: Release Sprint
           pr_source: staging
-          pr_target: release
+          pr_target: release-v1
           pr_body: |
             ### Changes
           pr_body_with_links: true
