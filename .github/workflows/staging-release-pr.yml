@@ -20,11 +20,8 @@ jobs:
           pr_title: "IGNORE: auto pr test"
           pr_body: |
             ## Changes:
-            <!-- === GH HISTORY FENCE === -->
-            <!-- === GH HISTORY FENCE === -->
+            <!-- START pr-commits -->
+            <!-- END pr-commits -->
           pr_draft: true
-      - uses: Frederick888/gh-ph@v1
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          $GITHUB_BASE_REF: master
-          $GITHUB_HEAD_REF: staging
+      - name: Pull Request Body
+        uses: technote-space/pr-commit-body-action@v1
