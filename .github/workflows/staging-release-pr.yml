@@ -24,11 +24,8 @@ jobs:
             <!-- END pr-commits -->
           pr_draft: true
       - name: get git log history
-        run: echo COMMITS=$(git log origin/staging..origin/master --oneline --no-merges) >> $GITHUB_ENV
-      - name: output commits
         id: git-log-history
-        run: |
-          echo "COMMITS=${{ env.LASTMERGES }}"
+        run: echo COMMITS=$(git log origin/staging..origin/master --oneline --no-merges) >> $GITHUB_ENV
       - name: update-pull-request
         uses: kt3k/update-pr-description@v2.1.1
         with:
