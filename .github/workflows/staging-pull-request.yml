@@ -2,7 +2,7 @@
 # where body is auto filled with pull requests merged as history
 # that triggers whenever a push/merge is done on master.
 
-name: Create Staging PR
+name: Create Staging Pull Request
 
 on:
   push:
@@ -10,18 +10,16 @@ on:
     - master
 
 jobs:
-  staging-release-pr:
-    name: Create Staging Release PR
+  staging-pull-request:
+    name: Create Staging Pull Request
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       # Creates pull request as draft, ignores if already created
       - name: Create pull request
-        uses: repo-sync/pull-request@v2
-        with:
-          destination_branch: staging
-          pr_title: Staging Release
-          pr_draft: true
+        run: gh pr create -B master -H staging --title 'Staging Release' -d
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Update pull request body
         uses: k3rnels-actions/pr-update@v2.0.0  # Currently cannot create draft PR
         id: pr_update
@@ -33,4 +31,3 @@ jobs:
           pr_body: |
             ### Changes
           pr_body_with_links: true
-          pr_assignees: enzorenz
