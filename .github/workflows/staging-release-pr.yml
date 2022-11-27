@@ -15,7 +15,6 @@ jobs:
         uses: devops-infra/action-pull-request@v0.5.3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          source_branch: master
           target_branch: staging
           title: My pull request
           draft: true
