@@ -17,7 +17,7 @@ jobs:
       - uses: actions/checkout@v3
       # Creates pull request as draft, ignores if already created
       - name: Create pull request
-        run: gh pr create -B master -H staging --title 'Staging Release' -d
+        run: gh pr create -B staging -H master -t 'Staging Release' -b '' -d
         env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Update pull request body
