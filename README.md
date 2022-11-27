@@ -15,3 +15,4 @@ try
 yes!
 normal merge
 noew one
+just add commit
