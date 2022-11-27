@@ -14,7 +14,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: Wuerike/standard-version-release-branch@1.2.0
+      - uses: Wuerike/standard-version-release-branch@1.2.1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           origin_branch: master
