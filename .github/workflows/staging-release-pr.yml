@@ -12,9 +12,16 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: create-release-pr
-        uses: grassedge/git-pr-release-action@v1.0
+        uses: k3rnels-actions/pr-update@v1
+        id: pr_update
         with:
-          base: staging
-          head: master
           token: ${{ secrets.GITHUB_TOKEN }}
-          assign: true
+          pr_title: Awsome PR
+          pr_source: master
+          pr_target: staging
+          pr_body: |
+            ### Description
+            Yes you can use Markdown here too
+            ### Changes
+            The following features have been added:\r\n
+          pr_body_with_links: true
