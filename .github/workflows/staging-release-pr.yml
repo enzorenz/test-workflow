@@ -14,14 +14,15 @@ jobs:
         with:
           fetch-depth: 0
       - name: pull-request
-        uses: devops-infra/action-pull-request@v0.5.3
+        uses: repo-sync/pull-request@v2
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          target_branch: staging
-          title: My pull request
-          body: |
+          destination_branch: "staging"
+          pr_title: "IGNORE: auto pr test"
+          pr_body: |
             ## Changes:
-            <!-- Diff commits - START -->
-            <!-- Diff commits - END -->
-          draft: true
-          get_diff: true
+            <!-- === GH HISTORY FENCE === -->
+            <!-- === GH HISTORY FENCE === -->
+          pr_draft: true
+      - uses: Frederick888/gh-ph@v1
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
