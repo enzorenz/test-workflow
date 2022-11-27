@@ -22,6 +22,7 @@ jobs:
         id: pr_update
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          pr_title: "IGNORE: auto pr test"
           pr_source: master
           pr_target: staging
           pr_body: |
