@@ -24,7 +24,7 @@ jobs:
           pr_title: Staging release
           pr_draft: true
       - name: Update pull request body
-        if: steps.opened-pr.outputs.has_changed_files
+        if: steps.opened-pr.outputs.has_changed_files  # Skip update if no changes
         uses: k3rnels-actions/pr-update@v2.0.0  # Currently cannot create draft PR
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
