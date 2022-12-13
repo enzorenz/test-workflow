@@ -1,36 +1,36 @@
-# Creates or updates a PR from master to staging
-# where body is auto filled with pull requests merged as history
-# that triggers whenever a push/merge is done on master.
+# # Creates or updates a PR from master to staging
+# # where body is auto filled with pull requests merged as history
+# # that triggers whenever a push/merge is done on master.
 
-name: Staging Pull Request
+# name: Staging Pull Request
 
-on:
-  push:
-    branches:
-    - master
+# on:
+#   push:
+#     branches:
+#     - master
 
-jobs:
-  staging-pull-request:
-    name: Create Staging PR
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      # Creates pull request as draft, ignores if already created
-      - name: Create pull request
-        id: opened-pr
-        uses: repo-sync/pull-request@v2
-        with:
-          destination_branch: staging
-          pr_title: Staging release
-          pr_draft: true
-      - name: Update pull request body
-        if: steps.opened-pr.outputs.has_changed_files  # Skip update if no changes
-        uses: k3rnels-actions/pr-update@v2.0.0  # Currently cannot create draft PR
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          pr_title: Staging release
-          pr_source: master
-          pr_target: staging
-          pr_body: |
-            ### Changes
-          pr_body_with_links: true
+# jobs:
+#   staging-pull-request:
+#     name: Create Staging PR
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v3
+#       # Creates pull request as draft, ignores if already created
+#       - name: Create pull request
+#         id: opened-pr
+#         uses: repo-sync/pull-request@v2
+#         with:
+#           destination_branch: staging
+#           pr_title: Staging release
+#           pr_draft: true
+#       - name: Update pull request body
+#         if: steps.opened-pr.outputs.has_changed_files  # Skip update if no changes
+#         uses: k3rnels-actions/pr-update@v2.0.0  # Currently cannot create draft PR
+#         with:
+#           token: ${{ secrets.GITHUB_TOKEN }}
+#           pr_title: Staging release
+#           pr_source: master
+#           pr_target: staging
+#           pr_body: |
+#             ### Changes
+#           pr_body_with_links: true
